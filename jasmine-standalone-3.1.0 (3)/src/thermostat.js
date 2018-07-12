@@ -27,10 +27,12 @@ Thermostat.prototype.isPowerSavingModeOn = function() {
 
 Thermostat.prototype.switchPowerSavingModeOn = function() {
   this.powerSavingMode = true;
+  this.maxTemp = 25;
 }
 
 Thermostat.prototype.switchPowerSavingModeOff = function() {
   this.powerSavingMode = false;
+  this.maxTemp = 32;
 }
 
 Thermostat.prototype.isMinimumTemperature = function() {
