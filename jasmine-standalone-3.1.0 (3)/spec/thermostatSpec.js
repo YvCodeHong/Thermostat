@@ -47,9 +47,33 @@ describe('Thermostat', function() {
      expect(thermostat.isPowerSavingModeOn()).toBe(true);
    });
 
-   it('can reset temperature back to 20', function() {
-     thermostat.down(1);
+   it('can reset temperature to 20', function() {
      thermostat.reset();
      expect(thermostat.temperature).toEqual(20);
    });
- });
+
+   it('shows low energy usage', function() {
+     console.log(thermostat)
+     thermostat.down();
+     thermostat.down();
+     thermostat.down();
+     console.log(thermostat)
+     expect(thermostat.currentEnergyUsage()).toEqual("low-usage");
+   });
+
+   it('shows medium energy usage', function() {
+     thermostat.up(3)
+     expect(thermostat.currentEnergyUsage()).toEqual("medium-usage");
+   });
+
+   it('shows when high energy usage', function() {
+     thermostat.switchPowerSavingModeOff();
+     thermostat.up();
+     thermostat.up();
+     thermostat.up();
+     thermostat.up();
+     thermostat.up();
+     thermostat.up();
+     expect(thermostat.currentEnergyUsage()).toEqual("high-usage");
+   });
+});
